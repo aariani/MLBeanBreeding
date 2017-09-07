@@ -98,6 +98,7 @@ def classification_task_predict(X, y, strat=None, cv=3, jobs=1):
         x+=1
     report_df = pd.DataFrame({'Classifier_ID':class_id, 'Precision':prec, 'Recall':recall},
                             columns = ['Classifier_ID', 'Precision', 'Recall'])
+    report_df = report_df.sort_values(by='Classifier_ID')
     return(report_df)
 
 def classification_task_score(X, y, strat=None, scorer='precision', cv=3, jobs=1):
@@ -148,5 +149,6 @@ def classification_task_score(X, y, strat=None, scorer='precision', cv=3, jobs=1
         for mod_res in res:
             res_df.append([i, mod_res])
         x+=1
-    report_df = pd.DataFrame(res_df, columns = ['model', 'res'])
+    report_df = pd.DataFrame(res_df, columns = ['Classifier_ID', 'Score'])
+    report_df = report_df.sort_values(by='Classifier_ID')
     return(report_df)
