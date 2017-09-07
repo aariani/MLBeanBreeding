@@ -119,8 +119,8 @@ def classification_task_score(X, y, strat=None, scorer='precision', cv=3, jobs=1
             cross validation. (Default None)
 
     scorer: string
-            the scoring function to use. See 'http://scikit-learn.org/stable/modules/model_evaluation.html'
-            for more informations about the string to use. Default
+            the scoring function to use. See http://scikit-learn.org/stable/modules/model_evaluation.html
+            for more informations about the parameter to use. Default precision
 
     cv: int
         The cross-validation K-fold. (Default 3)
@@ -131,10 +131,7 @@ def classification_task_score(X, y, strat=None, scorer='precision', cv=3, jobs=1
         return data frame with the score values for each k-fold 
         for each model
     '''
-# get the score informations
-    if len(np.unique(y)) > 2:
-        scorer = scorer+'_weighted'
-# I dont' this approach would be possible with the other function, since it calls directly the score_function
+# I don't this approach would be possible with the other function, since the previous call directly the score_function
     res_df = []
     cl_all = len(classifier_dict.keys())
     x=1
@@ -152,3 +149,4 @@ def classification_task_score(X, y, strat=None, scorer='precision', cv=3, jobs=1
     report_df = pd.DataFrame(res_df, columns = ['Classifier_ID', 'Score'])
     report_df = report_df.sort_values(by='Classifier_ID')
     return(report_df)
+
