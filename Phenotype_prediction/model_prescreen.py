@@ -87,10 +87,10 @@ def classification_task_predict(X, y, strat=None, cv=3, jobs=1):
     for i in classifier_dict.keys():
         if i == 'sgd': # shuffle indexes for 
             np.random.seed(101)
-            shuffle_index = np.random.permutation(np.shape(X)[0]) 
+            shuffle_index = np.random.permutation(np.shape(X)[0])
             X,y = X[shuffle_index], y[shuffle_index]
         print('Processing', ID_dict[i], 'model', x, 'of', cl_all)
-        y_pred = cross_val_predict(classifier_dict[i], X, y, 
+        y_pred = cross_val_predict(classifier_dict[i], X, y,
                 groups=strat, cv=cv, n_jobs=jobs)
         class_id.append(ID_dict[i])
         prec.append(precision_score(y, y_pred, average=average))
@@ -128,7 +128,7 @@ def classification_task_score(X, y, strat=None, scorer='precision', cv=3, jobs=1
     Returns
     ----------
     df: pandas dataFrame
-        return data frame with the score values for each k-fold 
+        return data frame with the score values for each k-fold
         for each model
     '''
 # I don't this approach would be possible with the other function, since the previous call directly the score_function
